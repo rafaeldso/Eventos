@@ -2,6 +2,11 @@ package com.rafaeldso.eventos.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.text.DateFormat
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 data class Event(
 
@@ -59,5 +64,16 @@ data class Event(
     fun urlImagem():String?{
         return this.image?.replace("http:", "https:")
     }
-
+    fun precoFormatado():String?{
+        val currency = NumberFormat.getCurrencyInstance(Locale("pt", "BR"));
+        val valor = currency.format(this.price);
+        return valor
+    }
+    fun dataFormatada():String?{
+        val data = Date(TimeUnit.SECONDS.toMillis(this.date))
+        val padrao = "dd/MM/yyyy HH:mm:ss"
+        val df: DateFormat = SimpleDateFormat(padrao)
+        val dataFormatada: String = df.format(data)
+        return dataFormatada
+    }
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rafaeldso.eventos.R
 import com.rafaeldso.eventos.model.Event
@@ -32,6 +33,7 @@ class MainActivity: AppCompatActivity(), EventListAdapter.OnEventListener {
         recyclerView.adapter = EventListAdapter(events, this, this)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
     override fun OnEventClick(position: Int) {

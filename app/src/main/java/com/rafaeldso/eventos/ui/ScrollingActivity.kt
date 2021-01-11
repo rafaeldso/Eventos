@@ -2,10 +2,9 @@ package com.rafaeldso.eventos.ui
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout
@@ -13,6 +12,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.rafaeldso.eventos.R
+import com.rafaeldso.eventos.extensions.conversorDeCoordenadasEmEndereco
 import com.rafaeldso.eventos.extensions.loadUrl
 import com.rafaeldso.eventos.model.Checkin
 import com.rafaeldso.eventos.model.Event
@@ -83,10 +83,49 @@ class ScrollingActivity : AppCompatActivity() {
     private fun initViews() {
         // Variáveis do xml geradas automaticamente pelo Koltin Extensions (veja import)
         descricao_carro_contents.text = event?.description.toString()
-        data_event_contents.text = event?.date.toString()
-        preco_event_contents.text = event?.price.toString()
-        latitude_longitude_event_contents.text = event?.latitude.toString()+"/"+event?.longitude.toString()
+        data_event_contents.text = event?.dataFormatada()
+        preco_event_contents.text = event?.precoFormatado()
+        latitude_longitude_event_contents.text =
+            event?.latitude?.let { event?.longitude?.let { it1 ->
+                conversorDeCoordenadasEmEndereco(it,
+                    it1, this)
+            } } //event?.latitude.toString()+"/"+event?.longitude.toString()
         appBarImg.loadUrl(event?.urlImagem())
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.opcaoCompartillhar -> {
+                compartilhar()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun compartilhar() {
+        var mensagem = "Evento: ${event?.title} \nPreço: ${event?.precoFormatado()} \n" +
+                "Data: ${event?.dataFormatada()} \n" +
+                "Endereço: ${event?.latitude?.let { event?.longitude?.let { it1 ->
+                    conversorDeCoordenadasEmEndereco(it,
+                        it1, this)
+                } }}"
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, mensagem)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
 
     }
 }

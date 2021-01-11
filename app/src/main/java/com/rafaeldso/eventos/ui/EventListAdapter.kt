@@ -13,6 +13,7 @@ import com.rafaeldso.eventos.model.Event
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.event_item.view.*
 import kotlinx.android.synthetic.main.material_list_item_single_line.view.*
+import kotlinx.android.synthetic.main.row_event.view.*
 
 class EventListAdapter(private val events: List<Event>,
                        private val context: Context,
@@ -24,8 +25,8 @@ class EventListAdapter(private val events: List<Event>,
 
         fun bindView(event: Event) {
             val picasso = Picasso.get()
-            val title = itemView.mtrl_list_item_text
-            val image = itemView.mtrl_list_item_icon
+            val title = itemView.event_title
+//            val image = itemView.mtrl_list_item_icon
             title.text = event.title
 
             /*picasso.load(urlImage)
@@ -33,7 +34,7 @@ class EventListAdapter(private val events: List<Event>,
                 .centerCrop()
                 .placeholder(R.drawable.placeholder)
                 .into(image)*/
-            itemView.mtrl_list_item_icon.loadUrl(event.urlImagem())
+//            itemView.mtrl_list_item_icon.loadUrl(event.urlImagem())
             itemView.setOnClickListener(this)
         }
 
@@ -44,7 +45,7 @@ class EventListAdapter(private val events: List<Event>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.material_list_item_single_line, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.row_event, parent, false)
         return ViewHolder(view,mOnEventListener)
     }
 
