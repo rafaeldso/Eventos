@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Eventos">
         <activity
-            android:name=".ui.ScrollingActivity"
+            android:name=".ui.EventoActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/Theme.Eventos.NoActionBar"></activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.ListaDeEventosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,16 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.rafaeldso.eventos.R
-import com.rafaeldso.eventos.extensions.loadUrl
 import com.rafaeldso.eventos.model.Event
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.event_item.view.*
-import kotlinx.android.synthetic.main.material_list_item_single_line.view.*
 import kotlinx.android.synthetic.main.row_event.view.*
 
-class EventListAdapter(private val events: List<Event>,
-                       private val context: Context,
-                        private val mOnEventListener: OnEventListener) : Adapter<EventListAdapter.ViewHolder>() {
+class ListaDeEventosAdapter(private val events: List<Event>,
+                            private val context: Context,
+                            private val mOnEventListener: OnEventListener) : Adapter<ListaDeEventosAdapter.ViewHolder>() {
     class ViewHolder(itemView: View,
                      private val onEventListener: OnEventListener)  : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 

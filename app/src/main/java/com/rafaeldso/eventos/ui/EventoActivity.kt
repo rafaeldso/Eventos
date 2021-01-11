@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -19,11 +18,11 @@ import com.rafaeldso.eventos.model.Event
 import com.rafaeldso.eventos.retrofit.CallbackResponse
 import com.rafaeldso.eventos.retrofit.client.EventWebClient
 import kotlinx.android.synthetic.main.activity_event_contents.*
-import kotlinx.android.synthetic.main.activity_scrolling.*
+import kotlinx.android.synthetic.main.activity_evento.*
 import kotlinx.android.synthetic.main.form_checkin.view.*
 
 
-class ScrollingActivity : AppCompatActivity() {
+class EventoActivity : AppCompatActivity() {
 
     // Inicializa a variável quando a mesma for utilizada pela primeira vez
     private val event: Event? by lazy {
@@ -32,20 +31,21 @@ class ScrollingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scrolling)
+        setContentView(R.layout.activity_evento)
         setSupportActionBar(findViewById(R.id.toolbar))
-        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = event?.title
-        toolbar_layout.setExpandedTitleTextAppearance(R.style.TituloToolbar)
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
+        configToolbar()
 
         initViews()
 
         fab.setOnClickListener {
                 onClickChekin(event)
         }
+    }
+
+    private fun configToolbar() {
+        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = event?.title
+        toolbar_layout.setExpandedTitleTextAppearance(R.style.TituloToolbar)
     }
 
     private fun onClickChekin(event: Event?) {
@@ -56,7 +56,7 @@ class ScrollingActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Checkin")
             .setView(createdView)
-            .setPositiveButton("Confirmar", object : DialogInterface.OnClickListener {
+            .setPositiveButton(getString(R.string.confirmar), object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                     val nome = createdView.form_checkin_nome.text.toString()
                     val email = createdView.form_checkin_email.text.toString()
