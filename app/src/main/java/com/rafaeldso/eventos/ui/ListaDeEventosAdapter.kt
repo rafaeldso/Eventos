@@ -62,9 +62,5 @@ class ListaDeEventosAdapter(private val events: List<Event>,
     interface OnEventListener{
         fun OnEventClick(position: Int)
     }
-
-/*    // Ao clicar no carro vamos navegar para a tela de detalhes
-    open fun onClickCarro(event: Event) {
-        MainActivity?.startActivity<ScrollingActivity>("eventExtras" to event)
-    }*/
+    
 }

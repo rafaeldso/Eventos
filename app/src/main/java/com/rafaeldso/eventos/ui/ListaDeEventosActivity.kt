@@ -36,10 +36,10 @@ class ListaDeEventosActivity: AppCompatActivity(), ListaDeEventosAdapter.OnEvent
     }
 
     override fun OnEventClick(position: Int) {
-        onClickCarro(mEvents[position])
+        onClickEvent(mEvents[position])
     }
 
-    open fun onClickCarro(event: Event) {
+    open fun onClickEvent(event: Event) {
         val intent = Intent(this, EventoActivity::class.java).apply {
             putExtra("eventExtras", event)
         }

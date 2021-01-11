@@ -8,8 +8,6 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.rafaeldso.eventos.R
 import com.rafaeldso.eventos.extensions.conversorDeCoordenadasEmEndereco
 import com.rafaeldso.eventos.extensions.loadUrl
@@ -82,7 +80,7 @@ class EventoActivity : AppCompatActivity() {
 
     private fun initViews() {
         // Variáveis do xml geradas automaticamente pelo Koltin Extensions (veja import)
-        descricao_carro_contents.text = event?.description.toString()
+        descricao_event_contents.text = event?.description.toString()
         data_event_contents.text = event?.dataFormatada()
         preco_event_contents.text = event?.precoFormatado()
         latitude_longitude_event_contents.text =
